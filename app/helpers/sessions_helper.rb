@@ -1,14 +1,14 @@
 module SessionsHelper
 
-  def create_session(user)
+  def log_in(user)
     session[:user_id] = user.id
   end
 
-  def destroy_session(current_user)
+  def log_out(current_user)
     session[:user_id] = nil
   end
 
   def current_user
-    User.find_by(id: session[:user_id])
+    @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
   end
 end
