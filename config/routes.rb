@@ -8,10 +8,15 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users, only: [:new, :show, :create] do
-    resources :registered_applications
+    resources :registered_applications, only: [:new, :create, :destroy]
   end
+
+  resources :registered_applications, only: [] do
+    resources :events, only: [:create, :destroy]
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
-  resources :password_resets
+  resources :password_resets, only: [:create, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
