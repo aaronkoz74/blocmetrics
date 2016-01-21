@@ -4,7 +4,5 @@ class RegisteredApplication < ActiveRecord::Base
 
   validates_uniqueness_of :name, :url
 
-  scope :ordered_by_name, -> { order('name ASC') }
+  scope :ordered_by_name, -> { order('LOWER(name) ASC') }
 end
-
-# RegisteredApplication.ordered_by_name

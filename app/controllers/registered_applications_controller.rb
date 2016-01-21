@@ -2,10 +2,6 @@ class RegisteredApplicationsController < ApplicationController
   before_action :set_user
   before_action :authorize_user, only: [:destroy]
 
-  def index
-    @applications = RegisteredApplication.all(order: 'name ASC')
-  end
-
   def show
     @application = RegisteredApplication.find(params[:id])
   end
