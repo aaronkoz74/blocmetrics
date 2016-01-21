@@ -30,7 +30,7 @@ class RegisteredApplicationsController < ApplicationController
       flash[:notice] = "#{@application.name} has been removed from registry list."
       redirect_to user_path(@user)
     else
-      flash[:alert] = "Application could not be de-registered. Please try again."
+      flash[:alert] = "Application could not be removed. Please try again."
     end
   end
 
