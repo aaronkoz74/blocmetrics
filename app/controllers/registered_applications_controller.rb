@@ -11,9 +11,7 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def create
-    @application = @user.registered_applications.new(app_params)
-    @application.name.capitalize!
-    @application.save
+    @application = @user.registered_applications.build(app_params)
 
     if @application.save
       redirect_to user_path(@user), notice: "#{@application.name} has been registered."
@@ -30,7 +28,8 @@ class RegisteredApplicationsController < ApplicationController
       flash[:notice] = "#{@application.name} has been removed from registry list."
       redirect_to user_path(@user)
     else
-      flash[:alert] = "Application could not be removed. Please try again."
+      flash.now[:alert] = "Application could not be removed. Please try again."
+      render :show
     end
   end
 

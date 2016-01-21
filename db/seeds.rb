@@ -19,8 +19,17 @@ end
     url = Faker::Internet.url
     user.registered_applications.create!(name: name, url: url)
   end
+
+10.times do
+  registered_applications = RegisteredApplication.random
+  registered_applications.each do |regapp|
+    name = Faker::Commerce.department(1)
+    regapp.events.create!(name: name)
+  end
+end
 end
 
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{RegisteredApplication.count} registered apps created"
+puts "#{Event.count} events created"

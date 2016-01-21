@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users, only: [:new, :show, :create] do
-    resources :registered_applications, only: [:new, :create, :destroy]
+    resources :registered_applications
   end
 
   resources :registered_applications, only: [] do
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :password_resets, only: [:create, :update]
+  resources :password_resets, only: [:new, :create, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
