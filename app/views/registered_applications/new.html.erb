@@ -1,0 +1,10 @@
+<%= form_for [@user, @application] do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Enter name of application", required: true %></br>
+    <%= f.label :URL %>
+    <%= f.text_field :url, class: 'form-control', placeholder: "Enter URL of the application", required: true %></br>
+    <%= f.submit "Register Application", class: 'btn btn-success' %>
+    <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
+  </div>
+<% end %>

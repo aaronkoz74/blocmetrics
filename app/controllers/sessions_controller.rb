@@ -12,8 +12,8 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-      # log_in(user)
-      redirect_to root_path, :notice => "#{user.name}, you are now signed in!"
+      log_in(user)
+      redirect_to user_path(@user), :notice => "#{user.name}, you are now signed in!"
 
     else
       flash.now[:alert] = "Invalid email/password combination"
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # log_out(current_user)
+    log_out(current_user)
     cookies.delete(:auth_token)
     redirect_to root_path, :notice => "You've been signed out, come back soon!"
   end

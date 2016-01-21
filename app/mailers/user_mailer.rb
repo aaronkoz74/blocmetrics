@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'Notifications@example.com'
+  default from: 'Blocmetrics'
 
   def welcome_email(user)
     @user = user

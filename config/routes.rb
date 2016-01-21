@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :show, :create] do
+    resources :registered_applications
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
 
