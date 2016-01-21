@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :registered_applications
   has_secure_password
   before_create { generate_token(:auth_token) }
-  before_save {self.email = email.downcase }
+  before_save { self.email = email.downcase }
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
