@@ -3,18 +3,19 @@ class RegisteredApplicationsController < ApplicationController
   before_action :authorize_user, only: [:destroy]
 
   def show
-    @application = RegisteredApplication.find(params[:id])
+    @registered_application = RegisteredApplication.find(params[:id])
+    @events = @registered_application.events.group_by(&:event_name)
   end
 
   def new
-    @application = RegisteredApplication.new
+    @registered_application = RegisteredApplication.new
   end
 
   def create
-    @application = @user.registered_applications.build(app_params)
+    @registered_application = @user.registered_applications.build(app_params)
 
-    if @application.save
-      redirect_to user_path(@user), notice: "#{@application.name} has been registered."
+    if @registered_application.save
+      redirect_to user_path(@user), notice: "#{@registered_application.name} has been registered."
     else
       flash.now[:alert] = "There was an error registering the application.  Please try again."
       render :new
@@ -22,10 +23,10 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def destroy
-    @application = @user.registered_applications.find(params[:id])
+    @registered_application = @user.registered_applications.find(params[:id])
 
-    if @application.destroy
-      flash[:notice] = "#{@application.name} has been removed from registry list."
+    if @registered_application.destroy
+      flash[:notice] = "#{@registered_application.name} has been removed from registry list."
       redirect_to user_path(@user)
     else
       flash.now[:alert] = "Application could not be removed. Please try again."

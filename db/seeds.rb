@@ -9,24 +9,30 @@
 require 'faker'
 
 10.times do
-  user = User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Lorem.characters(8))
+  User.create!(
+  name: Faker::Name.name,
+  email: Faker::Internet.email,
+  password: Faker::Lorem.characters(8)
+  )
 end
 
 5.times do
   users = User.all
   users.each do |user|
-    name = Faker::App.name
-    url = Faker::Internet.url
-    user.registered_applications.create!(name: name, url: url)
-  end
-
-10.times do
-  registered_applications = RegisteredApplication.random
-  registered_applications.each do |regapp|
-    name = Faker::Commerce.department(1)
-    regapp.events.create!(name: name)
+    user.registered_applications.create!(
+    name: Faker::App.name,
+    url: Faker::Internet.url
+    )
   end
 end
+
+
+200.times do
+  registered_applications = RegisteredApplication.all
+  registered_app = registered_applications.sample
+  registered_app.events.create!(
+    event_name: 'signup'
+  )
 end
 
 puts "Seed finished"
