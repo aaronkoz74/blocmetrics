@@ -1,5 +1,5 @@
 <div class="row">
-  <%= form_for [@user, @application] do |f| %>
+  <%= form_for [@user, @registered_application] do |f| %>
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Enter name of application", required: true %>

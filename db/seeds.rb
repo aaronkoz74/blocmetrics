@@ -27,11 +27,12 @@ end
 end
 
 
-200.times do
+500.times do
   registered_applications = RegisteredApplication.all
   registered_app = registered_applications.sample
+  event = ['signup', 'play', 'reload', 'share', 'view', 'copy' ]
   registered_app.events.create!(
-    event_name: 'signup'
+    event_name: event.sample
   )
 end
 

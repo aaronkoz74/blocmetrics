@@ -2,9 +2,11 @@ class RegisteredApplicationsController < ApplicationController
   before_action :set_user
   before_action :authorize_user, only: [:destroy]
 
+
   def show
     @registered_application = RegisteredApplication.find(params[:id])
-    @events = @registered_application.events.group_by(&:event_name)
+    @events = @registered_application.events
+    @events_grouped = @events.group_by(&:event_name)
   end
 
   def new
