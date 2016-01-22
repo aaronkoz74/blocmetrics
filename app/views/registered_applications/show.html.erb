@@ -7,6 +7,7 @@
     <% @events_grouped.each do |event, count| %>
       <p><%= event %></p>
     <% end %>
+    <p><%= @events.group(:event_name).count %></p>
   <div class="row">
     <%= link_to "Remove From List", [@user, @registered_application], method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" }%>
     <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
