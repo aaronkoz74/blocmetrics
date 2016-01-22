@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+puts "#{User.count} users exist"
+puts "#{RegisteredApplication.count} registered apps exist"
+puts "#{Event.count} events exist"
+
 require 'faker'
 
 10.times do
@@ -19,7 +23,7 @@ end
 5.times do
   users = User.all
   users.each do |user|
-    user.registered_applications.create!(
+    user.registered_applications.create(
     name: Faker::App.name,
     url: Faker::Internet.url
     )
@@ -31,7 +35,7 @@ end
   registered_applications = RegisteredApplication.all
   registered_app = registered_applications.sample
   event = ['signup', 'play', 'reload', 'share', 'view', 'copy' ]
-  registered_app.events.create!(
+  registered_app.events.create(
     event_name: event.sample
   )
 end

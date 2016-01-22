@@ -1,16 +1,12 @@
-<h1>Application Details</h1>
+<h1>Application Details
+<%= link_to "Remove From List", [@user, @registered_application], method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" }%>
+<%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
+</h1>
 <div class="row">
   <div class="col-md-8">
     <h3>Name:  <small><%= @registered_application.name %></small></h3>
     <h3>URL:  <small><%= @registered_application.url %></small></h3>
-    <h3>Events </h3>
-    <% @events_grouped.each do |event, count| %>
-      <p><%= event %></p>
-    <% end %>
-    <p><%= @events.group(:event_name).count %></p>
-  <div class="row">
-    <%= link_to "Remove From List", [@user, @registered_application], method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" }%>
-    <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
-  </div>
+    <h3>Events: </h3>
+    <%= render 'registered_applications/events' %>
   </div>
 </div>
