@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'logout' => 'sessions#destroy'
-  get 'login' => 'sessions#new'
+  delete '/logout' => 'sessions#destroy', :as => "logout"
+  get '/login' => 'sessions#new', :as => "login"
+  post '/login' => 'sessions#create', :as => "create"
 
   get 'about' => 'welcome#about'
 
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
     resources :events, only: [:create, :destroy]
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets, only: [:new, :create, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
