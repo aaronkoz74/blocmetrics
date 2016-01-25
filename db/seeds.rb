@@ -6,21 +6,41 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+puts "#{User.count} users exist"
+puts "#{RegisteredApplication.count} registered apps exist"
+puts "#{Event.count} events exist"
+
 require 'faker'
 
 10.times do
-  user = User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Lorem.characters(8))
+  User.create!(
+  name: Faker::Name.name,
+  email: Faker::Internet.email,
+  password: Faker::Lorem.characters(8)
+  )
 end
 
 5.times do
   users = User.all
   users.each do |user|
-    name = Faker::App.name
-    url = Faker::Internet.url
-    user.registered_applications.create!(name: name, url: url)
+    user.registered_applications.create(
+    name: Faker::App.name,
+    url: Faker::Internet.url
+    )
   end
+end
+
+
+500.times do
+  registered_applications = RegisteredApplication.all
+  registered_app = registered_applications.sample
+  event = ['signup', 'play', 'reload', 'share', 'view', 'copy' ]
+  registered_app.events.create(
+    event_name: event.sample
+  )
 end
 
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{RegisteredApplication.count} registered apps created"
+puts "#{Event.count} events created"
