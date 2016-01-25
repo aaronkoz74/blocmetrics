@@ -6,7 +6,6 @@ class RegisteredApplicationsController < ApplicationController
   def show
     @registered_application = RegisteredApplication.find(params[:id])
     @events = @registered_application.events.all
-    # @events_grouped = @events.group_by(&:event_name)
   end
 
   def new
@@ -14,7 +13,7 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def create
-    @registered_application = @user.registered_applications.build(app_params)
+    @registered_application = @user.registered_applications.create(app_params)
 
     if @registered_application.save
       redirect_to user_path(@user), notice: "#{@registered_application.name} has been registered."

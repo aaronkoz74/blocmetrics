@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # namespace :api do
+  # get 'events/create'
+  # end
+
   delete '/logout' => 'sessions#destroy', :as => "logout"
   get '/login' => 'sessions#new', :as => "login"
   post '/login' => 'sessions#create', :as => "create"
@@ -14,6 +18,11 @@ Rails.application.routes.draw do
 
   resources :registered_applications, only: [] do
     resources :events, only: [:create, :destroy]
+  end
+
+  namespace :api, defaults: { format: :json } do
+    match '/events', to: 'events#preflight', via: [:options]
+    resources :events, only: [:create]
   end
 
   resources :password_resets, only: [:new, :create, :update]
