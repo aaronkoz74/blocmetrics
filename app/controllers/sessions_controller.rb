@@ -12,14 +12,12 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-    # user = User.authenticate(params[:email], params[:password])
-    # if user
       log_in user
       flash.now[:notice] = "#{user.name}, you are now logged in!"
-      redirect_to user_path(user)
+      redirect_to user
 
     else
-      flash.now[:alert] = "Invalid email/password combination"
+      flash.now[:danger] = "Invalid email/password combination"
       render :new
     end
   end

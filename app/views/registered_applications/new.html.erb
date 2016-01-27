@@ -1,20 +1,20 @@
+<h2>Add an Application</h2>
+
 <div class="row">
   <div class="col-md-8">
-    <h2>Add an Application</h2>
-      <%= form_for [@user, @registered_application] do |f| %>
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Enter name of application", required: true %>
-        </div>
-        <div class="form-group">
-          <%= f.label :url %>
-          <%= f.text_field :url, class: 'form-control', placeholder: "Enter URL of application", required: true %>
-        </div>
-        <div class="form-group">
-          <%= f.submit "Register Application", class: 'btn btn-success' %>
-          <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
-        </div>
-      <% end %>
-    </div>
+    <%= form_for [@user, @registered_application] do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Enter name of application", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.text_field :url, class: 'form-control', placeholder: "Enter URL of application", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Register Application", class: 'btn btn-success' %>
+        <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
+      </div>
+    <% end %>
   </div>
 </div>

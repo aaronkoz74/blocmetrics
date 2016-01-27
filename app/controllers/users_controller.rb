@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.welcome_email(@user).deliver_now
       flash[:notice] = "Welcome to Blocmetrics #{@user.name}!"
-      session[:user_id] = @user.id
-      redirect_to user_path(@user)
+      log_in @user
+      redirect_to @user
     else
-      flash.now[:alert] = "There was an error creating your account. Please try again."
+      flash.now[:danger] = "There was an error creating your account. Please try again."
       render :new
     end
   end
