@@ -12,7 +12,9 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-      log_in(user)
+    # user = User.authenticate(params[:email], params[:password])
+    # if user
+      log_in user
       flash.now[:notice] = "#{user.name}, you are now logged in!"
       redirect_to user_path(user)
 

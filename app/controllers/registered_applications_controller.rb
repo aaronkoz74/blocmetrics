@@ -46,6 +46,7 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def authorize_user
+    current_user = @user
     registered_application = RegisteredApplication.find(params[:id])
     unless current_user == registered_application.user
       flash[:alert] = "You do not have permission to remove this application."
