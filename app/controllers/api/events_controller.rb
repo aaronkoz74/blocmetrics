@@ -9,9 +9,9 @@ class API::EventsController < ApplicationController
     registered_application = RegisteredApplication.find_by(url: request.env['HTTP_ORIGIN'])
 
     if registered_application
-      @event = registered_application.events.create!(event_params)
+      @event = registered_application.events.create(event_params)
 
-      if @event.save
+      if @event
         render json: @event, status: :created
       else
         render json: { errors: @event.errors }, status: :unprocessable_entity
