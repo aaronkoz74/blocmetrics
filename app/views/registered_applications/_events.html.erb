@@ -3,10 +3,5 @@
     <th class="text-center"><strong>Event Name</strong></th>
     <th class="text-center"><strong>  Occurrence(s)</strong></th>
   </tr>
-  <% @events.group(:event_name).count.each do |event, count| %>
-  <tr>
-    <th class="text-center"><%= event %></th>
-    <th class="text-center"><%= count %></th>
-  </tr>
-  <% end %>
-</table></br>
+  <%= pie_chart @registered_application.events.group(:event_name).count %>
+</table>
