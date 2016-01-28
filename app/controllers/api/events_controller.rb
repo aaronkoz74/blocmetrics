@@ -11,7 +11,7 @@ class API::EventsController < ApplicationController
     if registered_application
       @event = registered_application.events.create(event_params)
 
-      if @event.save
+      if @event
         render json: @event, status: :created
       else
         render json: { errors: @event.errors }, status: :unprocessable_entity

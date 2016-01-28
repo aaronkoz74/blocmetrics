@@ -16,7 +16,7 @@ class RegisteredApplicationsController < ApplicationController
     @registered_application = @user.registered_applications.new(app_params)
 
 
-    if @registered_application.save
+    if @registered_application
       redirect_to user_path(@user), notice: "#{@registered_application.name} has been registered."
     else
       flash.now[:alert] = "There was an error registering the application.  Please try again."
