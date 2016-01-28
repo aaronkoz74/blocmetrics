@@ -13,7 +13,8 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def create
-    @registered_application = @user.registered_applications.create(app_params)
+    @registered_application = @user.registered_applications.new(app_params)
+
 
     if @registered_application
       redirect_to user_path(@user), notice: "#{@registered_application.name} has been registered."
@@ -46,6 +47,7 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def authorize_user
+    current_user = @user
     registered_application = RegisteredApplication.find(params[:id])
     unless current_user == registered_application.user
       flash[:alert] = "You do not have permission to remove this application."

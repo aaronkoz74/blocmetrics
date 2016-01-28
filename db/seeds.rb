@@ -35,9 +35,9 @@ end
   registered_applications = RegisteredApplication.all
   registered_app = registered_applications.sample
   event = ['signup', 'play', 'reload', 'share', 'view', 'copy' ]
-  registered_app.events.create(
-    event_name: event.sample
-  )
+  random_event = registered_app.events.create(
+    event_name: event.sample)
+  random_event.update_attribute :created_at, rand(5.months).seconds.ago
 end
 
 puts "Seed finished"

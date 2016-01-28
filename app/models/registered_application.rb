@@ -2,12 +2,11 @@ class RegisteredApplication < ActiveRecord::Base
   belongs_to :user
   has_many :events
 
-  # Method callbacks
-  # before_save :format_url_correctly
+  before_validation :format_url_correctly
 
   # Check for uniqueness of url - multiple sites could have same name
-  validates :url uniqueness: true
-  validates :url, format: { with: /http:\/\/.*/ }
+  validates :url, uniqueness: true
+  validates :url, format: { with: /http[s]?:\/\/.*/ }
 
   # Custom validation:
   # validate :url_format
@@ -21,4 +20,12 @@ class RegisteredApplication < ActiveRecord::Base
   # rescue URI::InvalidURIError
     # base[:errors] << 'invalid url'
   # end
+
+  private
+
+  def format_url_correctly
+    unless self.url.downcase.scan(/http[s]?:\/\//).count == 0
+      self.url.prepend("http://")
+    end
+  end
 end
