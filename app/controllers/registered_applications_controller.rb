@@ -13,7 +13,8 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def create
-    @registered_application = @user.registered_applications.create(app_params)
+    @registered_application = @user.registered_applications.new(app_params)
+
 
     if @registered_application.save
       redirect_to user_path(@user), notice: "#{@registered_application.name} has been registered."

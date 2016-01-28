@@ -6,7 +6,7 @@ class RegisteredApplication < ActiveRecord::Base
 
   # Check for uniqueness of url - multiple sites could have same name
   validates :url, uniqueness: true
-  validates :url, format: { with: /http:\/\/.*/ }
+  validates :url, format: { with: /http[s]?:\/\/.*/ }
 
   # Custom validation:
   # validate :url_format
@@ -24,7 +24,7 @@ class RegisteredApplication < ActiveRecord::Base
   private
 
   def format_url_correctly
-    unless self.url.downcase.include?("http://")
+    unless self.url.downcase.scan(/http[s]?:\/\//).count == 0
       self.url.prepend("http://")
     end
   end
