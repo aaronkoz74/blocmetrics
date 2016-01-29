@@ -1,19 +1,15 @@
 <h2>Track an Application</h2>
 
-<div class="row">
+<div class="form-horizontal">
   <div class="col-md-8">
     <%= form_for [@user, @registered_application] do |f| %>
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Enter name of application", required: true %>
-      </div>
-      <div class="form-group">
+        <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Enter name of application", required: true %></br>
         <%= f.label :url %>
-        <%= f.text_field :url, class: 'form-control', placeholder: "Enter URL of application", required: true %>
-      </div>
-      <div class="form-group">
+        <%= f.text_field :url, class: 'form-control', placeholder: "Enter URL of application", required: true %></br>
         <%= f.submit "Register Application", class: 'btn btn-success' %>
-        <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %>
+        <%= link_to "Back", user_path(@user), class: 'btn btn-warning' %></br>
       </div>
     <% end %>
   </div>
