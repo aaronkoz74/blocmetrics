@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :events, only: [:create]
   end
 
-  resources :password_resets, only: [:new, :create, :update]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

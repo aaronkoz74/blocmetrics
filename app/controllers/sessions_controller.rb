@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in(user)
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      flash.now[:notice] = "#{user.name}, you are now logged in!"
+      flash[:notice] = "#{user.name}, you are now logged in!"
       redirect_to user
 
     else
