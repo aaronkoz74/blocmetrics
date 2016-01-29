@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
 
     if @user.save
+      log_in(@user)
       UserMailer.welcome_email(@user).deliver_now
       flash[:notice] = "Welcome to Blocmetrics #{@user.name}!"
-      log_in @user
       redirect_to @user
     else
       flash.now[:danger] = "There was an error creating your account. Please try again."

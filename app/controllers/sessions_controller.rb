@@ -7,13 +7,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
 
     if user && user.authenticate(params[:session][:password])
-      if params[:remember_me]
-        cookies.permanent[:auth_token] = user.auth_token
-      else
-        cookies[:auth_token] = user.auth_token
-      end
-      log_in user
-      flash.now[:notice] = "#{user.name}, you are now logged in!"
+      log_in(user)
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:notice] = "#{user.name}, you are now logged in!"
       redirect_to user
 
     else
@@ -23,8 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
-    cookies.delete(:auth_token)
+    log_out if logged_in?
     redirect_to root_path, :notice => "You've been logged out, come back soon!"
   end
 end
